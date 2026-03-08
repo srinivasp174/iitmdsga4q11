@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from pydantic import BaseModel
 from typing import List
 from fastapi.middleware.cors import CORSMiddleware
+import requests
 
 # Create FastAPI app
 app = FastAPI()
@@ -76,3 +77,7 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+# Test the API
+resp = requests.post("http://127.0.0.1:8000/sentiment", json={"sentences":["Nice!"]})
+print(resp.json())
